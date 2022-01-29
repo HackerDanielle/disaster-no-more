@@ -73,8 +73,6 @@ body {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: 1rem;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
 
 .navbar .navbar-toggler {
@@ -97,4 +95,20 @@ body {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+.newNavbar {
+  background-color: #301014;
+}
+
+.newSidebarColor{
+  background-color: #CAE2D1;
+}
+
+.dashBoardColor{
+  background-color: #EDF4ED;
+}
+
+.caputMortuum{
+  background-color: #51291E;
 }
