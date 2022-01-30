@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "4680ac2d-1984-4fad-90ba-dea8b883e22e",
+		"name": "API Functions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"temp\":0,\r\n    \"humidity\":1,\r\n    \"waterLevel\":22,\r\n    \"timestamp\":\"2022-01-30T00:12:35+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/measurements",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"measurements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"temp\":0,\r\n    \"humidity\":1,\r\n    \"waterLevel\":84,\r\n    \"timestamp\":\"2022-01-30T00:12:35+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/measurements/61f5d89850420cefb6b3a9be",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"measurements",
+						"61f5d89850420cefb6b3a9be"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/measurements",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"measurements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/measurements/61f5d89850420cefb6b3a9be",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"measurements",
+						"61f5d89850420cefb6b3a9be"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/measurements/61f5d89850420cefb6b3a9be",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"measurements",
+						"61f5d89850420cefb6b3a9be"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
