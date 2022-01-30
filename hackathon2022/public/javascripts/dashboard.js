@@ -71,3 +71,47 @@ document.getElementById("defaultOpen").click();
   })
 })()
 
+// async getMeasurements(){
+//   const config = {
+//     headers: {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+//     }
+//   };
+//   this.measurements = await axios.get('http://api.thedamagecontrol.com/measurements%27,config);
+// }
+
+async function test() {
+  var config = {
+    method: 'get',
+    url: 'http://api.thedamagecontrol.com/measurements/',
+    headers: { }
+  };
+
+  await axios(config)
+  .then(function (response) {
+    //console.log(JSON.stringify(response.data));
+    var objArray = JSON.stringify(response.data);
+    var jsonData = JSON.parse(objArray);
+    var latestObj = jsonData[jsonData.length - 1];
+
+    console.log(latestObj);
+    console.log(latestObj.temp);
+
+    document.getElementById("status").innerHTML = "Safe";
+    document.getElementById("temp").innerHTML = latestObj.temp;
+    document.getElementById("humidity").innerHTML = latestObj.humidity;
+    document.getElementById("water").innerHTML = latestObj.waterLevel;
+    
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+  // setTimeout(window.location.reload(),30000);
+}  
+  test();
+  
+    
+
