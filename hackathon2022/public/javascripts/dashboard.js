@@ -19,96 +19,99 @@ function openDevice(evt, eventNumber) {
 
 document.getElementById("defaultOpen").click();
 
-// (function () {
-//   'use strict'
+(function () {
+  'use strict'
 
-//   feather.replace({ 'aria-hidden': 'true' })
+  feather.replace({ 'aria-hidden': 'true' })
 
-//   // Graphs
-//   var ctx = document.getElementById('myChart')
-//   // eslint-disable-next-line no-unused-vars
-//   var myChart = new Chart(ctx, {
-//     type: 'line',
-//     data: {
-//       labels: [
-//         'Sunday',
-//         'Monday',
-//         'Tuesday',
-//         'Wednesday',
-//         'Thursday',
-//         'Friday',
-//         'Saturday'
-//       ],
-//       datasets: [{
-//         data: [
-//           15339,
-//           21345,
-//           18483,
-//           24003,
-//           23489,
-//           24092,
-//           12034
-//         ],
-//         lineTension: 0,
-//         backgroundColor: 'transparent',
-//         borderColor: '#007bff',
-//         borderWidth: 4,
-//         pointBackgroundColor: '#007bff'
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         yAxes: [{
-//           ticks: {
-//             beginAtZero: false
-//           }
-//         }]
-//       },
-//       legend: {
-//         display: false
-//       }
+  // Graphs
+  var ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ],
+      datasets: [{
+        data: [
+          15339,
+          21345,
+          18483,
+          24003,
+          23489,
+          24092,
+          12034
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+})()
+
+// async getMeasurements(){
+//   const config = {
+//     headers: {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
 //     }
-//   })
-// })()
+//   };
+//   this.measurements = await axios.get('http://api.thedamagecontrol.com/measurements%27,config);
+// }
 
-// var requirejs = require('requirejs');
+async function test() {
+  var config = {
+    method: 'get',
+    url: 'http://api.thedamagecontrol.com/measurements/',
+    headers: { }
+  };
 
-// import axios from "../axios";
+  await axios(config)
+  .then(function (response) {
+    //console.log(JSON.stringify(response.data));
+    var objArray = JSON.stringify(response.data);
+    var jsonData = JSON.parse(objArray);
+    var latestObj = jsonData[jsonData.length - 1];
 
-// requirejs.config({
-//     nodeRequire: require
-// });
+    console.log(latestObj);
+    console.log(latestObj.temp);
 
-// requirejs(['axios'],
-// function   (axios) {
-    var config = {
-      method: 'get',
-      url: 'http://api.thedamagecontrol.com/measurements/',
-      headers: { }
-    };
+    document.getElementById("status").innerHTML = "Safe";
+    document.getElementById("temp").innerHTML = latestObj.temp;
+    document.getElementById("humidity").innerHTML = latestObj.humidity;
+    document.getElementById("water").innerHTML = latestObj.waterLevel;
+    
 
-    axios(config)
-    .then(function (response) {
-      //console.log(JSON.stringify(response.data));
-      var objArray = JSON.stringify(response.data);
-      var jsonData = JSON.parse(objArray);
-      var latestObj = jsonData[jsonData.length - 1];
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
-      console.log(latestObj);
-      console.log(latestObj.temp);
-
-      document.getElementById("status").innerHTML = "Safe";
-      document.getElementById("temp").innerHTML = latestObj.temp;
-      document.getElementById("humidity").innerHTML = latestObj.humidity;
-      document.getElementById("water").innerHTML = latestObj.waterLevel;
-      
-
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-// });
-
-// var axios = require('axios');
-
+  // setTimeout(window.location.reload(),30000);
+}  
+  test();
+  
+    
 
