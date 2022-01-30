@@ -1,0 +1,59 @@
+
+#define POWER_PIN  24
+#define SIGNAL_PIN A5
+
+#include "DHT.h"
+
+// DHT22 DAT pin 
+#define DHTPIN 2
+
+// Type of DHT sensor
+#define DHTTYPE DHT11
+
+int value = 0; // variable to store the sensor value
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(POWER_PIN, OUTPUT);   // configure D7 pin as an OUTPUT
+  digitalWrite(POWER_PIN, LOW); // turn the sensor OFF
+  
+  dht.begin();
+}
+
+void loop() {
+  delay(2000);
+
+  digitalWrite(POWER_PIN, HIGH);  // turn the sensor ON
+  delay(10);                      // wait 10 milliseconds
+  value = analogRead(SIGNAL_PIN); // read the analog value from sensor
+  digitalWrite(POWER_PIN, LOW);   // turn the sensor OFF
+
+  
+  float h = dht.readHumidity();
+  float f = dht.readTemperature(true);
+
+  String message = "";
+
+  if (isnan(h) || isnan(f)) {
+    return;
+  }
+
+  // Create JSON as a message
+  message = message + "{\"humidity\":";
+  message = message + h;
+  message = message + ", \"temperature\":";
+  message = message + f;
+  //start new stuff
+  
+  message = message + ", \"waterlevel\":";
+  message = message + value;
+  
+  message = message + "}";
+
+  // Send message
+  Serial.println(message);
+}
+
