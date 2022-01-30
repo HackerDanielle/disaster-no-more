@@ -1,7 +1,5 @@
 /* globals Chart:false, feather:false */
 
-const socket = io();
-
 function openDevice(evt, eventNumber) {
   var i, tabcontent, tablinks;
 
@@ -73,38 +71,44 @@ document.getElementById("defaultOpen").click();
 //   })
 // })()
 
-socket.emit('temp',latestObj.temp);
+// var requirejs = require('requirejs');
 
-socket.on('temp',(tempVal) => {
-  console.log(tempVal);
-  document.getElementById("temp").innerHTML = latestObj.tempVal;
-})
+// import axios from "../axios";
+
+// requirejs.config({
+//     nodeRequire: require
+// });
+
+// requirejs(['axios'],
+// function   (axios) {
+    var config = {
+      method: 'get',
+      url: 'http://api.thedamagecontrol.com/measurements/',
+      headers: { }
+    };
+
+    axios(config)
+    .then(function (response) {
+      //console.log(JSON.stringify(response.data));
+      var objArray = JSON.stringify(response.data);
+      var jsonData = JSON.parse(objArray);
+      var latestObj = jsonData[jsonData.length - 1];
+
+      console.log(latestObj);
+      console.log(latestObj.temp);
+
+      document.getElementById("status").innerHTML = "Safe";
+      document.getElementById("temp").innerHTML = latestObj.temp;
+      document.getElementById("humidity").innerHTML = latestObj.humidity;
+      document.getElementById("water").innerHTML = latestObj.waterLevel;
+      
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+// });
 
 // var axios = require('axios');
-// var config = {
-//   method: 'get',
-//   url: 'http://api.thedamagecontrol.com/measurements/',
-//   headers: { }
-// };
 
-// axios(config)
-// .then(function (response) {
-//   //console.log(JSON.stringify(response.data));
-//   var objArray = JSON.stringify(response.data);
-//   var jsonData = JSON.parse(objArray);
-//   var latestObj = jsonData[jsonData.length - 1];
-
-//   console.log(latestObj);
-//   console.log(latestObj.temp);
-
-//   document.getElementById("status").innerHTML = "Safe";
-//   document.getElementById("temp").innerHTML = latestObj.temp;
-//   document.getElementById("humidity").innerHTML = latestObj.humidity;
-//   document.getElementById("water").innerHTML = latestObj.waterLevel;
-  
-
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
 
