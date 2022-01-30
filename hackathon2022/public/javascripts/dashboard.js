@@ -97,12 +97,22 @@ async function test() {
 
     console.log(latestObj);
     console.log(latestObj.temp);
-
-    document.getElementById("status").innerHTML = "Safe";
+    
     document.getElementById("temp").innerHTML = latestObj.temp;
     document.getElementById("humidity").innerHTML = latestObj.humidity;
     document.getElementById("water").innerHTML = latestObj.waterLevel;
     
+    if (latestObj.waterLevel > 200) {
+      document.getElementById("status").innerHTML = "Is flooding";
+    } else if (latestObj.temp > 105) {
+      document.getElementById("status").innerHTML = "Heat Wave";
+    } else if (latestObj.temp < 20) {
+      document.getElementById("status").innerHTML = "Cold Spell";
+    } else if (latestObj.temp > 150) {
+      document.getElementById("status").innerHTML = "Fire";
+    } else {
+      document.getElementById("status").innerHTML = "Safe";
+    }
 
   })
   .catch(function (error) {
